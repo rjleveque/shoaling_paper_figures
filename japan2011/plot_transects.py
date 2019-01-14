@@ -7,7 +7,17 @@ import os
 
 outdir = '_output'
 format = 'binary'
+
 savefig_ext = '.jpg'
+figdir = '../figures'
+os.system('mkdir -p %s' % figdir)
+
+def save_figure(fname):
+    """Save figure to figdir with desired extension"""
+    full_fname = os.path.join(figdir,fname) + savefig_ext
+    savefig(full_fname, bbox_inches='tight')
+    print('Created %s' % full_fname)
+
 
 xlimits = [-127, -124]
 zlimits = [-0.2, 0.6]
@@ -67,10 +77,8 @@ def plot_transect(ylat, frameno, fg, xcutoff, trname, plotdir):
     plot(xout, ctx, 'b--', label='Transmission')
     legend(loc='upper left')
 
-    fname = os.path.join(plotdir, '%s_%s' % (trname,str(frameno).zfill(4))) \
-                + savefig_ext
-    savefig(fname, bbox_inches='tight')
-    print("Created %s" % fname)
+    fname = '%s_%s' % (trname,str(frameno).zfill(4))
+    save_figure(fname)
 
 def plot_topo(fg, trname, plotdir):
     figure(21, figsize=(10,3))
@@ -88,9 +96,8 @@ def plot_topo(fg, trname, plotdir):
     #xticks(rotation=20)
     xlabel('Longitude')
     ylabel('meters')
-    fname = os.path.join(plotdir, '%s_topo%s' % (trname,savefig_ext))
-    savefig(fname, bbox_inches='tight')
-    print("Created %s" % fname)
+    fname = '%s_topo' % trname
+    save_figure(fname)
 
     
 # Transect at ylat=44.2:

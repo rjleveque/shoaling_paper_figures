@@ -9,10 +9,14 @@ pd = setplot.setplot()
 pd.outdir=os.path.abspath('_output')
 
 savefig_ext = '.jpg'
+figdir = '../figures'
+os.system('mkdir -p %s' % figdir)
 
-def savefigp(fname):
-    savefig(fname, bbox_inches='tight')
-    print('Created %s' % fname)
+def save_figure(fname):
+    """Save figure to figdir with desired extension"""
+    full_fname = os.path.join(figdir,fname) + savefig_ext
+    savefig(full_fname, bbox_inches='tight')
+    print('Created %s' % full_fname)
 
     
 frameno = 1
@@ -20,8 +24,8 @@ plotframe(frameno,pd)
 figure(0)
 #axis([-140,-122,40,50]) # set in setplot.py
 plotbox([-128,-123.5,43,45],kwargs={'color':'k','linewidth':1.5})
-fname = 'pacific_f%s' % str(frameno).zfill(4) + savefig_ext
-savefigp(fname)
+fname = 'pacific_f%s' % str(frameno).zfill(4)
+save_figure(fname)
 
 figure(1)
 plot([-127,-124],[44.4,44.4],'k')
@@ -32,8 +36,8 @@ xticks(range(-128,-123),fontsize=15)
 yticks(arange(43.2,45,0.4),fontsize=15)
 xlabel('longitude',fontsize=15)
 ylabel('latitude',fontsize=15)
-fname = 'planview_f%s' % str(frameno).zfill(4) + savefig_ext
-savefigp(fname)
+fname = 'planview_f%s' % str(frameno).zfill(4)
+save_figure(fname)
     
 frameno = 3
 plotframe(frameno,pd)
@@ -46,6 +50,6 @@ xticks(range(-128,-123),fontsize=15)
 yticks(arange(43.2,45,0.4),fontsize=13)
 xlabel('longitude',fontsize=13)
 ylabel('latitude',fontsize=13)
-fname = 'planview_f%s' % str(frameno).zfill(4) + savefig_ext
-savefigp(fname)
+fname = 'planview_f%s' % str(frameno).zfill(4)
+save_figure(fname)
 
