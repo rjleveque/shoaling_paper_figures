@@ -63,11 +63,13 @@ def plot_transect(ylat, frameno, fg, xcutoff, trname, plotdir):
     xlim(xlimits)
     ylim(zlimits)
     timestr = timeformat(framesoln.t)
-    title('Transect of wave at latitude %.1f at time %s' % (ylat,timestr))
+    title('Transect of wave at latitude %.1f at time %s' % (ylat,timestr),
+            fontsize=15)
     ticklabel_format(format='plain',useOffset=False)
-    #xticks(rotation=20)
-    xlabel('Longitude')
-    ylabel('meters')
+    xticks([-127,-126,-125,-124],fontsize=15)
+    yticks(linspace(-0.2,0.6,5),fontsize=15)
+    #xlabel('Longitude')
+    ylabel('meters', fontsize=15)
     hl = 3000.
     A0 = 0.1328
     z = where(topo<-10, -topo, nan)
@@ -75,7 +77,7 @@ def plot_transect(ylat, frameno, fg, xcutoff, trname, plotdir):
     plot(xout, AG, 'g--',label="Green's Law")
     ctx = A0 * 2*sqrt(hl)/(sqrt(hl)+sqrt(z))
     plot(xout, ctx, 'b--', label='Transmission')
-    legend(loc='upper left')
+    legend(loc='upper left', fontsize=15)
 
     fname = '%s_%s' % (trname,str(frameno).zfill(4))
     save_figure(fname)
@@ -91,11 +93,13 @@ def plot_topo(fg, trname, plotdir):
     grid(True)
     xlim(xlimits)
     ylim(-3500, 500)
-    title('Topography on Transect at Latitude %.1f' % ylat)
+    xticks([-127,-126,-125,-124],fontsize=15)
+    yticks([-3000,-2000,-1000,0],fontsize=15)
+    title('Topography on Transect at Latitude %.1f' % ylat, fontsize=15)
     ticklabel_format(format='plain',useOffset=False)
     #xticks(rotation=20)
-    xlabel('Longitude')
-    ylabel('meters')
+    xlabel('Longitude', fontsize=15)
+    ylabel('meters', fontsize=15)
     fname = '%s_topo' % trname
     save_figure(fname)
 
