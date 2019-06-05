@@ -22,7 +22,7 @@ subroutine qinit(meqn,mbc,mx,xlower,dx,q,maux,aux)
     real(kind=8) :: xcell,x0,width,eta
 
     x0 = -60.d3   ! initial location of step
-    width = 10.e3
+    width = 30.e3
 
     do i=1,mx
       xcell = 0.5*(xgrid(i) + xgrid(i+1))

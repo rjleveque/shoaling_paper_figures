@@ -75,15 +75,15 @@ def setplot(plotdata=None):
         title('')
         ylabel('meters', fontsize=14)
         if current_data.frameno == 0:
-            text(-80,-0.4,'$\longrightarrow$',fontsize=20)
-            text(-80,-0.6,'Incident')
+            text(-95,-0.4,'$\longrightarrow$',fontsize=20)
+            text(-95,-0.6,'Incident')
         h = current_data.q[0,:]
         mx2 = int(round(len(h)/2.))
         etamax2 = (h[:mx2] - hl).max()
         print('mx2 = %i, etamax2 = %g' % (mx2,etamax2))
         if (current_data.frameno == 5) and (etamax2 > 0.1):
-            text(-220,-0.4,'$\longleftarrow$',fontsize=20)
-            text(-220,-0.6,'Reflected')
+            text(-190,-0.4,'$\longleftarrow$',fontsize=20)
+            text(-190,-0.6,'Reflected')
             text(30,-0.4,'$\longrightarrow$',fontsize=20)
             text(15,-0.6,'Transmitted')
         

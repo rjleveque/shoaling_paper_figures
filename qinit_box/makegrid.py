@@ -96,7 +96,5 @@ def makegrid(xs):
         print("Created ",fname)
 
 if __name__=='__main__':
-    #makegrid(xs=60.e3)
-    #makegrid(xs=5.e3)
-    makegrid(xs=10.e3)
+    makegrid(xs=15.e3)
 

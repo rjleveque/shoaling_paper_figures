@@ -27,7 +27,7 @@ def save_figure(fname):
     savefig(full_fname, bbox_inches='tight')
     print('Created %s' % full_fname)
 
-for xs in [0., 5e3, 60e3]:
+for xs in [0., 15e3, 60e3]:
     makegrid.makegrid(xs)
     import mapc2p
     import setplot
