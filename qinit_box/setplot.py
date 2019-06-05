@@ -34,7 +34,8 @@ xgrid = griddata[:,0]
 zgrid = griddata[:,1]
 
 #xlimits = [-300e3,100e3]
-xlimits = [-300,100]
+#xlimits = [-300,100]
+xlimits = [-300,150]
 
 def setplot(plotdata=None):
 
@@ -82,10 +83,20 @@ def setplot(plotdata=None):
         etamax2 = (h[:mx2] - hl).max()
         print('mx2 = %i, etamax2 = %g' % (mx2,etamax2))
         if (current_data.frameno == 5) and (etamax2 > 0.1):
-            text(-190,-0.4,'$\longleftarrow$',fontsize=20)
-            text(-190,-0.6,'Reflected')
-            text(30,-0.4,'$\longrightarrow$',fontsize=20)
-            text(15,-0.6,'Transmitted')
+            text(-190,-0.5,'$\longleftarrow$',fontsize=20)
+            text(-190,-0.7,'Reflected')
+            text(30,-0.5,'$\longrightarrow$',fontsize=20)
+            text(15,-0.7,'Transmitted')
+        if (current_data.frameno == 6) and (etamax2 > 0.1):
+            text(-260,-0.5,'$\longleftarrow$',fontsize=20)
+            text(-260,-0.7,'Reflected')
+            text(40,-0.5,'$\longrightarrow$',fontsize=20)
+            text(25,-0.7,'Transmitted')
+        elif (current_data.frameno == 6):
+            text(-20,-0.5,'$\longleftarrow$',fontsize=20)
+            text(-20,-0.7,'Reflected')
+            text(70,-0.5,'$\longrightarrow$',fontsize=20)
+            text(65,-0.7,'Transmitted')
         
 
     plotfigure = plotdata.new_plotfigure(name='domain', figno=0)

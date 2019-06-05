@@ -10,8 +10,8 @@ def makegrid(xs):
     mx = 10000  # desired number of grid cells
 
     #xs = 60e3
-    x1 = 100e3
-    x0 = -3*x1
+    x1 = 150e3 #100e3
+    x0 = -300e3 #-3*x1
 
     x0_shore = x1     # initial shoreline
     x0_slope = -xs     # start of continental slope
@@ -96,5 +96,7 @@ def makegrid(xs):
         print("Created ",fname)
 
 if __name__=='__main__':
-    makegrid(xs=15.e3)
+    #makegrid(xs=0.e3)
+    #makegrid(xs=15.e3)
+    makegrid(xs=60.e3)
 

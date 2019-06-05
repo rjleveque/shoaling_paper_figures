@@ -43,7 +43,7 @@ for xs in [0., 15e3, 60e3]:
     pd.outdir = outdir
     pd = setplot.setplot(pd)  # reload grid.data for each xs value
     pd.outdir=os.path.abspath(outdir)
-    for frameno in [0,5]:
+    for frameno in [0,6]:
         plotframe(frameno,pd)
         fname = xs_str + '_frame%s' % str(frameno).zfill(2)
         save_figure(fname)
