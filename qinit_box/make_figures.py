@@ -11,7 +11,7 @@ import makegrid
 from imp import reload
 reload(makegrid)
 
-run_code = True  # set to fault if output already exists
+run_code = True  # set to False if output already exists
 if run_code:
     # create executable and .data files:
     os.system('make .exe')
