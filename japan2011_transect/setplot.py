@@ -37,6 +37,16 @@ zgrid = griddata[:,1]
 #xlimits = [-300e3,100e3]
 xlimits = [-250,0]
 
+def timeformat(t):
+    from numpy import mod
+    hours = int(t/3600.)
+    tmin = mod(t,3600.)
+    min = int(tmin/60.)
+    sec = int(mod(tmin,60.))
+    timestr = '%s:%s:%s' % (hours,str(min).zfill(2),str(sec).zfill(2))
+    return timestr
+
+
 def setplot(plotdata=None):
 
     if plotdata is None:
@@ -52,7 +62,7 @@ def setplot(plotdata=None):
 
     def fixticks(current_data):
         from pylab import ticklabel_format, plot,grid,ones,sqrt,\
-             where,tight_layout,legend,nan
+             where,tight_layout,legend,nan, title
         ticklabel_format(format='plain',useOffset=False)
 
         # to plot max elevation over entire computation:
@@ -85,7 +95,8 @@ def setplot(plotdata=None):
         #plot(xp, ct12g, 'm--', label='CT12*G')
         legend(loc='upper left', fontsize=8)
         #tight_layout()
-        
+        timestr = timeformat(current_data.t)
+        title('Surface displacement at time %s' % timestr)
 
     plotfigure = plotdata.new_plotfigure(name='domain', figno=10)
     #plotfigure.kwargs = {'figsize':(7,6.5)}
@@ -98,75 +109,55 @@ def setplot(plotdata=None):
     plotaxes.title = 'Surface displacement'
     plotaxes.afteraxes = fixticks
 
-    plotitem = plotaxes.new_plotitem(plot_type='1d_plot')
-    plotitem.plot_var = geoplot.surface
-    plotitem.color = 'k'
-    plotitem.MappedGrid = True
-    plotitem.mapc2p = mapc2p
-
-    plotitem = plotaxes.new_plotitem(plot_type='1d_plot')
-    plotitem.show = False
-    plotitem.plot_var = geoplot.topo
-    plotitem.color = 'k'
-    plotitem.MappedGrid = True
-    plotitem.mapc2p = mapc2p
-
-    plotaxes = plotfigure.new_plotaxes()
-    plotaxes.show = False
-    plotaxes.axescmd = 'subplot(312)'
-    plotaxes.xlimits = xlimits
-    #plotaxes.xlimits = [-100e3,-20e3]
-    #plotaxes.ylimits = [-1000, 1000]
-    #plotaxes.title = 'Full depth'
-    plotaxes.title = 'momentum'
-    plotaxes.afteraxes = fixticks1
-    plotitem.MappedGrid = True
-    plotitem.mapc2p = mapc2p
-
     plotitem = plotaxes.new_plotitem(plot_type='1d_fill_between')
-    plotitem.show = False
     plotitem.plot_var = geoplot.surface
     plotitem.plot_var2 = geoplot.topo
+    plotitem.color = [.5,.5,1]
+    plotitem.MappedGrid = True
+    plotitem.mapc2p = mapc2p
+
+    plotitem = plotaxes.new_plotitem(plot_type='1d_plot')
+    plotitem.plot_var = geoplot.surface
     plotitem.color = 'b'
     plotitem.MappedGrid = True
     plotitem.mapc2p = mapc2p
 
-    plotitem = plotaxes.new_plotitem(plot_type='1d_plot')
-    plotitem.show = False
-    plotitem.plot_var = geoplot.topo
-    plotitem.color = 'k'
-    plotitem.MappedGrid = True
-    plotitem.mapc2p = mapc2p
-
-    plotitem = plotaxes.new_plotitem(plot_type='1d_plot')
-    plotitem.plot_var = 1
-    plotitem.color = 'k'
-    plotitem.MappedGrid = True
-    plotitem.mapc2p = mapc2p
+    # Topography plot:
 
     plotaxes = plotfigure.new_plotaxes()
     plotaxes.axescmd = 'axes([.1,.1,.8,.3])' #'subplot(212)'
     plotaxes.xlimits = xlimits
     #plotaxes.xlimits = [-100e3,-20e3]
-    #plotaxes.ylimits = [-1000, 1000]
+    plotaxes.ylimits = [-3500, 500]
     #plotaxes.title = 'Full depth'
     #plotaxes.title = 'topography'
 
     def fix_topo_plot(current_data):
         from pylab import title,xlabel
-        title('')
+        title('Topography')
         xlabel('kilometers', fontsize=14)
     plotaxes.afteraxes = fix_topo_plot
 
+    plotitem = plotaxes.new_plotitem(plot_type='1d_fill_between')
+    plotitem.plot_var = geoplot.surface
+    plotitem.plot_var2 = geoplot.topo
+    plotitem.color = [.5,.5,1]
     plotitem.MappedGrid = True
     plotitem.mapc2p = mapc2p
 
-    plotitem = plotaxes.new_plotitem(plot_type='1d_plot')
-    #plotitem.show = False
+    def deep(current_data):
+        from numpy import ones
+        x = current_data.x
+        z = -10000*ones(x.shape)
+        return z
+
+    plotitem = plotaxes.new_plotitem(plot_type='1d_fill_between')
     plotitem.plot_var = geoplot.topo
-    plotitem.color = 'k'
+    plotitem.plot_var2 = deep
+    plotitem.color = [.5,1,.5]
     plotitem.MappedGrid = True
     plotitem.mapc2p = mapc2p
+
 
     #----------
 
