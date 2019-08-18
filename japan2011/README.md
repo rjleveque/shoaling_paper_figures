@@ -17,3 +17,10 @@ To run the following:
 
     python plot_transects # to make transect cross section plots for Figure 8
 ```
+
+You can also 
+
+```
+    make plots
+```
+to create plots of all frames.
