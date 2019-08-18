@@ -35,9 +35,12 @@ GEOLIB = $(CLAW)/geoclaw_1d/src/1d_nonuniform
 include $(GEOLIB)/Makefile.geoclaw_1d_nonuniform
 
 MODULES = \
+  setprob_module.f90 \
 
 SOURCES = \
   qinit.f90 \
+  b4step1.f90 \
+  claw1ez.f \
 
 #-------------------------------------------------------------------
 # Include Makefile containing standard definitions and make options:

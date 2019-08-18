@@ -21,7 +21,8 @@ try:
     fname = '_output/fort.hmax'
     d = numpy.loadtxt(fname)
     etamax = numpy.where(d[:,1]>1e-6, d[:,2], numpy.nan)
-    xmax = d[:,0]
+    #xmax = d[:,0]
+    xmax = mapc2p(d[:,0])
     jmax = find(d[:,1]>0).max()
     print("run-in = %8.2f,  run-up = %8.2f" % (d[jmax,0],d[jmax,2]))
     print('Loaded hmax from ',fname)
@@ -55,8 +56,8 @@ def setplot(plotdata=None):
         ticklabel_format(format='plain',useOffset=False)
 
         # to plot max elevation over entire computation:
-        #if xmax is not None:
-        #    plot(xmax, etamax, 'r')
+        if xmax is not None:
+            plot(xmax, etamax, 'r')
 
         #grid(True)
         hl = 3000.  #2500.

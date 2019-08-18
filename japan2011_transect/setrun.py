@@ -12,12 +12,6 @@ import os, sys
 import numpy as np
 from mapc2p import mapc2p
 
-dispersion = False            # Include Boussinesq terms?
-B_param =  1.0 / 15.0         # Parameter for the Boussinesq eqns
-sw_depth0 = 20.              # Use pure SWE if depth less than sw_depth0
-sw_depth1 = 80.              # Use pure Bous if depth greater than sw_depth1
-radial = False               # Include radial source terms?
-
 grid = np.loadtxt('grid.data', skiprows=1)
 print('Read grid from grid.data, %i grid values' % grid.shape[0])
 mx = grid.shape[0] - 1
@@ -52,13 +46,7 @@ def setrun(claw_pkg='geoclaw'):
     # Problem-specific parameters to be written to setprob.data:
     #------------------------------------------------------------------
     # Sample setup to write one line to setprob.data ...
-    probdata = rundata.new_UserData(name='probdata',fname='setprob.data')
-    probdata.add_param('bouss'             , dispersion  ,'Include dispersive terms?')
-    probdata.add_param('B_param'           , B_param     ,'Parameter for the Boussinesq eq')
-    probdata.add_param('sw_depth0', sw_depth0)
-    probdata.add_param('sw_depth1', sw_depth1)
-    probdata.add_param('radial', radial, 'Radial source term?')
-
+    #probdata = rundata.new_UserData(name='probdata',fname='setprob.data')
 
 
     #------------------------------------------------------------------
@@ -127,8 +115,8 @@ def setrun(claw_pkg='geoclaw'):
     if clawdata.output_style==1:
         # Output ntimes frames at equally spaced times up to tfinal:
         # Can specify num_output_times = 0 for no output
-        clawdata.num_output_times = 25
-        clawdata.tfinal = 2500.
+        clawdata.num_output_times = 32
+        clawdata.tfinal = 3200.
         clawdata.output_t0 = False  # output at initial (or restart) time?
 
     elif clawdata.output_style == 2:
