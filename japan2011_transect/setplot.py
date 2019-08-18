@@ -54,6 +54,13 @@ def setplot(plotdata=None):
 
     plotdata.clearfigures()
 
+    def deep(current_data):
+        # below topography, for fill_between plots
+        from numpy import ones
+        x = current_data.x
+        z = -10000*ones(x.shape)
+        return z
+
     def fixticks(current_data):
         from pylab import ticklabel_format, plot,grid,ones,sqrt,\
              where,tight_layout,legend,nan, title
@@ -111,6 +118,14 @@ def setplot(plotdata=None):
     plotitem.MappedGrid = True
     plotitem.mapc2p = mapc2p
 
+    plotitem = plotaxes.new_plotitem(plot_type='1d_fill_between')
+    plotitem.plot_var = geoplot.topo
+    plotitem.plot_var2 = deep
+    plotitem.color = [.5,1,.5]
+    plotitem.MappedGrid = True
+    plotitem.mapc2p = mapc2p
+
+
     # Topography plot:
 
     plotaxes = plotfigure.new_plotaxes()
@@ -131,12 +146,6 @@ def setplot(plotdata=None):
     plotitem.color = [.5,.5,1]
     plotitem.MappedGrid = True
     plotitem.mapc2p = mapc2p
-
-    def deep(current_data):
-        from numpy import ones
-        x = current_data.x
-        z = -10000*ones(x.shape)
-        return z
 
     plotitem = plotaxes.new_plotitem(plot_type='1d_fill_between')
     plotitem.plot_var = geoplot.topo

@@ -11,7 +11,7 @@ import makegrid
 import mapc2p
 import setplot
 
-run_code = False  # set to False if output already exists
+run_code = True  # set to False if output already exists
 if run_code:
     # create executable and .data files:
     os.system('make .exe')
@@ -31,12 +31,14 @@ def save_figure(fname):
 
 makegrid.makegrid()
 
+outdir = '_output'
+
 if run_code:
     runclaw(xclawcmd='xgeo',outdir=outdir)   # run clawpack code
 
 pd = ClawPlotData()
 pd = setplot.setplot(pd)  # reload grid.data for each xs value
-pd.outdir=os.path.abspath('_output')
+pd.outdir=os.path.abspath(outdir)
 for frameno in [0,18]:
     plotframe(frameno,pd)
     fname = 'transect_frame%s' % str(frameno).zfill(2)
