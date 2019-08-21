@@ -77,7 +77,7 @@ def plot_transect(ylat, frameno, fg, xcutoff, trname, plotdir):
     plot(xout, AG, 'g--',label="Green's Law")
     ctx = A0 * 2*sqrt(hl)/(sqrt(hl)+sqrt(z))
     plot(xout, ctx, 'b--', label='Transmission')
-    legend(loc='upper left', fontsize=15)
+    legend(loc='upper left', fontsize=15, framealpha=1)
 
     fname = '%s_%s' % (trname,str(frameno).zfill(4))
     save_figure(fname)

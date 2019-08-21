@@ -7,7 +7,7 @@ To run the following:
 
 
 ```
-    python fetch_topo.py  # to fetch topo and dtopo files
+    python maketopo.py  # to fetch topo and dtopo files
 
     python make_fgmax_transects.py  # to create input files for transect data
 
@@ -18,7 +18,7 @@ To run the following:
     python plot_transects # to make transect cross section plots for Figure 8
 ```
 
-You can also 
+After running the code, you can also 
 
 ```
     make plots

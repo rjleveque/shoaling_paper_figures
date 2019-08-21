@@ -399,9 +399,9 @@ def setgeo(rundata):
     #    [topotype, minlevel, maxlevel, t1, t2, fname]
 
     topo_data.topofiles.append([3, 1, 1, 0., 1.e10, \
-                                'etopo1_-180_-110_20_60_4min.asc'])
+                                'etopo1_-180_-110_20_60_1min.asc'])
     topo_data.topofiles.append([3, 1, 1, 0., 1.e10, \
-                                'etopo1_-240_-180_20_60_4min.asc'])
+                                'etopo1_-240_-180_20_60_1min.asc'])
 
 
     # == setdtopo.data values ==
