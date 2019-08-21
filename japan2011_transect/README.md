@@ -12,7 +12,10 @@ To run the following:
     python make_figures.py # to run code and make plots for Figure 9
 ```
 
-You can also 
+Note that `make_figures.py` has a boolean variable `run_code`. Set this to
+`True` if you have not yet run the code via `make .output`.
+
+After running the code you can also 
 
 ```
     make plots

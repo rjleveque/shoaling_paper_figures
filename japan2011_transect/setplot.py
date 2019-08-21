@@ -26,6 +26,8 @@ try:
     jmax = find(d[:,1]>0).max()
     print("run-in = %8.2f,  run-up = %8.2f" % (d[jmax,0],d[jmax,2]))
     print('Loaded hmax from ',fname)
+    # ignore etamax to left of initial peak since wave moves to right
+    etamax = numpy.where(xmax >= -200., etamax, numpy.nan)
 except:
     xmax = None
     print("Failed to load fort.hmax")
@@ -68,9 +70,9 @@ def setplot(plotdata=None):
 
         # to plot max elevation over entire computation:
         if xmax is not None:
-            plot(xmax, etamax, 'r')
+            plot(xmax, etamax, 'r',label='wave height')
 
-        #grid(True)
+        grid(True)
         hl = 3000.
         hr = 100.
         greens = (hl/hr)**(0.25)
@@ -88,7 +90,7 @@ def setplot(plotdata=None):
         plot([-60e3,0],[ct12,ct12],'r--',label='CT1*CT2')
         ctx = 2*sqrt(hl)/(sqrt(hl)+sqrt(z))
         plot(xp, ctx, 'b--', label='CT')
-        legend(loc='upper left', fontsize=8)
+        legend(loc='upper left', fontsize=8,framealpha=1)
         #tight_layout()
         timestr = timeformat(current_data.t)
         title('Surface displacement at time %s' % timestr)
@@ -99,7 +101,7 @@ def setplot(plotdata=None):
     # surface plot:
 
     plotaxes = plotfigure.new_plotaxes()
-    plotaxes.axescmd = 'axes([.1,.6,.8,.3])' #'subplot(211)'
+    plotaxes.axescmd = 'axes([.1,.5,.8,.4])' #'subplot(211)'
     plotaxes.xlimits = xlimits
     plotaxes.ylimits = [-1,4]
     plotaxes.title = 'Surface displacement'
@@ -154,6 +156,11 @@ def setplot(plotdata=None):
     plotitem.MappedGrid = True
     plotitem.mapc2p = mapc2p
 
+    plotitem = plotaxes.new_plotitem(plot_type='1d_plot')
+    plotitem.plot_var = geoplot.topo
+    plotitem.color = 'g'
+    plotitem.MappedGrid = True
+    plotitem.mapc2p = mapc2p
 
     #----------
 
