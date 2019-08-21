@@ -3,8 +3,8 @@
 Code to accompany the paper 
 *Shoaling on Steep Continental Slopes: Relating Transmission and Reflection Coefficients to Green's Law*, by J. George, D.  I. Ketcheson, and R. J. LeVeque.  
 
-Revised code for the revised paper submitted June, 2019 and then revised
-again to improve Japan 2011 figures and submitted in August, 2019.
+Revised code for the revised paper submitted June, 2019. The submission was
+then revised again to improve Japan 2011 figures and submitted in August, 2019.
 
 The figures in the paper were generated using Clawpack Version 5.5.0, [DOI: 10.5281/zenodo.1405834](https://doi.org/10.5281/zenodo.1405834).  See the [documentation](http://www.clawpack.org) for installation instructions.
 
